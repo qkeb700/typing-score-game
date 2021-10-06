@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      height: 100%;
+    }
+    body {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #score {
+      font-size: 45px;
+      position: absolute;
+      top: 25px;
+      right: 50px;
+      display: none;
+    }
+    #start {
+      width: 70px;
+      padding: 10px 15px;
+      text-align: center;
+      font: bold 16px arial;
+      color: #000;
+      background-color: #dedede;
+      border-radius: 8px;
+      position: absolute;
+
+    }
+    #start:hover {
+      cursor: pointer;
+      background-color: #ccc;
+    }
+    .bubb {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      font: bold 16px verdana;
+      background-color: yellow;
+      text-align: center;
+      line-height: 30px;
+      border-radius: 50%;
+
+    }
+  </style>
+</head>
+<body>
+  <div id="score">0</div>
+  <div id="start">START</div>
+  <span class="bubb">A</span>
+
+  <script src="http://code.jquery.com/jquery.min.js"></script>
+  <script>
+    $(function(){
+      let width = screen.width - 100;
+      let height = screen.height - 200;
+      let code = 0;
+      console.log(width, height);
+
+      $('#start').css({
+        left: width/2 + 'px',
+        top: height/2 + 'px'
+      });
+
+      $('#start').click(function(){
+        $(this).fadeOut('slow');
+        $('#score').fadeIn('slow');
+        // playGame();
+        console.log(playGame());
+      })
+
+      function playGame(){
+        let color = randomColor();
+        let k = Math.floor(Math.random()*(90-65+1)) + 65;
+        let ch = String.fromCharCode(k);
+        let top = Math.floor(Math.random()*height);
+        let left = Math.floor(Math.random()*width);
+        let alp = '<span class="bubb bull' + k + '" + style="left: '+
+                  left+'px; top: ' + top+'px;'+ ' background-color: ' + color +
+                  '">'+ ch + '</span>';
+        $('body').append(alp);
+        setTimeout(playGame, 1000);
+      }
+
+      function randomColor(){
+        let color = '#';
+        let no;
+        let colorTag = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9','a','b','c','d','e','f'];
+        for(let i = 0; i < 6; i++) {
+          no = Math.floor(Math.random()*15);
+          color += colorTag[no];
+        }
+        return color;
+      }
+
+      $(document).keydown(function(event){
+        let keycode = event.keyCode;
+        $('.bull'+keycode).animate({
+          top: height+"px",
+          opacity: 0
+        }, "slow");
+        $('.bull'+keycode).fadeOut('slow').hide('slow', function(){
+          code += 20;
+          $('#score').html(code);
+          $(this).remove();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
