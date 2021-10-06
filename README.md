@@ -21,4 +21,6 @@
 
 ![1](https://user-images.githubusercontent.com/46728564/136230109-3877b306-db3a-4fec-bd50-157b5811f555.png)
 
+### 점수내기 페이지
+
 ![2](https://user-images.githubusercontent.com/46728564/136230135-9ec9f28f-6a75-4277-a775-d555550a0910.png)
